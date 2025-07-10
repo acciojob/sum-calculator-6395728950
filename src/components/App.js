@@ -1,13 +1,26 @@
-
-import React from "react";
-import './../styles/App.css';
+import React, { useEffect, useState } from "react";
+import "./../styles/App.css";
 
 const App = () => {
+  const [currentSum, setSum] = useState(0);
+  const [arr, setArr] = useState([]);
+
+  useEffect(() => {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+      sum += arr[i];
+    }
+    setSum(sum);
+  }, [arr]); // ✅ correct dependency array
+
+   
+
   return (
     <div>
-        {/* Do not remove the main div */}
+      <input type="number" onChange={(e)=>setArr([...arr,Number(e.target.value)])} />
+      <p>Sum: {currentSum}</p>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
